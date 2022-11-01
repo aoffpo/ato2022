@@ -22,3 +22,4 @@ Why Warnermedia implementation
 decouple application from rule set
     persist in DB and use in another service
     evolve rules separately from service code
+    get engine instance (ruleset from s3)
