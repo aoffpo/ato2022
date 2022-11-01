@@ -1,0 +1,170 @@
+Building a data mesh with open source technologies
+
+Data engineer who needs a platform to experiment
+needs to find data/ trusted data fast
+go to prod quickly
+
+Data storage
+    warehouse via ELT/ETL pipeline
+        well organized
+        schema changes are expensive
+        new sources of data are complex to add
+    data lake
+        easy to store
+        schema designed on read
+        burden is on reader of data
+        eventually turns into swamp
+    
+    ingest -> bronze/raw -> silver/pure -> gold/ rich data
+        cache to data lake
+
+    where is governance, where is lineage, where is SME  
+
+Key problems
+    data quality
+    data freshness latency
+    ownership
+    metrics and measures
+    source of truth
+    migration to cloud
+
+    cataloging
+        columns
+        description
+        types
+        no opensource solutions
+
+    governance 
+        size of company is irrelevant
+        no open source
+    shapes
+        structured vs unstructured
+        streaming
+
+    Roles to serve
+        in
+            data architenct 
+            data product owner 
+            chief data officer
+
+        out
+            science
+            analytics
+
+big data pipeline  
+    hybrid datastores
+        why one only
+        customer needs
+        combining search services
+    
+
+compute vs storage
+    on prem - limited
+    cloud: split and grow at difference pace
+
+data platform   
+    foundation bricks
+        digital business technologies
+        connect and accelerate
+
+Data mesh 
+    solve key problems
+
+    principles
+        domain ownership
+            align business tech and analytics around domain
+            scale by teams
+            closer to business
+        data as product
+            discoverable
+            addressable
+            understandable
+            trustworthy and truthful
+            interoperable and composable
+            native access
+            valuable to own
+            secure
+            data application life cycle
+        self-service data platform
+            remove friction
+            reduce time to market
+            keep governance
+        federated computational governance
+            "power to the people"
+            data governance transfered to domain level
+            create a federation of data governing bodies vs. central organization
+                enterpise creates vision, domain implements it 
+            not just about data - about compute, too  
+
+Data mesh
+    new shape: data with antennas
+        control clients
+        discovery
+            dictionary, etc
+        sources
+            ingest and federate
+            analytics and operational data clients
+        consumers
+THE DATA QUANTUM  (as building blocks)
+    control services
+    source services
+    dictionary services 
+
+    data onboarding
+        observe, quality, tranformation
+    interoperable data 
+
+
+Meshing data    
+    each data quantum focuses on domain
+    sources -> product a + b => data product c => applications (1..n)
+
+    microservices meet data 
+        apis are the same fro contorl observatiblity and discovery
+
+    data contracts 
+        binding but flexible
+        contracts are exchanged between quanta 
+            think inheritance in OOO 
+
+    high reusability
+        just add a new contracts
+    quantum dictionary
+        gather all contracts and quanta and put in elasticsearch
+    
+
+    IMPLEMENTATION
+        three planes
+            data mesh 
+                management tools, dictionary, relationships between quanta 
+            data product 
+                single quantum
+            infrastructure
+                databases and sources
+    quantum has integral data - storage into ex: mysql 
+    great expectations --> for quality?
+
+    consumers 
+        jupyter, extensions for notebooks for observatiblity, discovery and control 
+
+    user 
+        trusted data
+        dictionary
+        in notebook
+
+    DE builds quanta instead of pipelines
+
+
+    takeaways
+        data servers users
+        four principles
+        data contract defineses gehavior of data processoor
+        data product implemented as quantum 
+
+
+
+
+
+        
+
+

@@ -1,0 +1,96 @@
+Keeping and eye on your cloud native applications with opentelemetry
+
+why is something happening
+    performance bottlenecks
+    points of failure
+    unexpected behaving
+
+observation techniques
+    metrics collection adn observabilty
+    lots of languages
+    lots of trace/metrics formats
+    lots of viz and analysis tools
+
+
+    jaegoer, zipkin, prometheurs, instana, aws xray
+        might need to change if solution doesn't satisfy need .... hard to change
+
+opentelemetry
+    distrbited tracing 
+    metrics
+    log collection
+    supports client instrumentation
+
+    dropin for frameworks like .net 
+    CNCF project - from opentracing and opencensus
+    1400 contributors 110k contributions
+
+
+    Features
+        open source
+        standardized approch
+        multiple data formats
+        export to multiple backend formats 
+            multiple tools supported
+        no vender lockin because easy to switch output formats
+        
+
+        opentelemetry sdk > oltp explorer (oltp telemetry data)
+         opentelemetry sdk    > native exporter\
+        
+        opentelemetryprotocol oltp  
+            format = protobuf
+            output = binary, json
+            transport =http or grpc
+
+        agent to -> oltp -> backend
+        serverless -> oltp -> backend
+
+        opentelemetry collector
+            aggregate from different output formats
+            send to multiple backends
+            and can fanout 
+
+Open Telemetry collector    
+    receievers
+        oltp 
+            grpc    
+            http
+    processsors
+        batch
+    exporrters
+        instana 
+            endpoint
+            agent_key
+
+service
+    pipelines
+        traces
+            receievers
+            processsors
+            exporrters
+
+
+receiever
+    gets data into a collector 
+    push or pull 
+    signals (traces metrics, logs, "baggage")
+    multiple out of the box 
+        docker k8, etc 
+        postgres, rabbit...snowflake?>https://github.com/HGInsights/opentelemetry_snowpack
+
+processor 
+    buffer, batch
+    memory limiter - prefvent out of memory on collector (drop data or GC)
+    contrib/tree/main/processor
+
+exporter
+    reformat from interal format to backend format
+        jaeger zipkin prometheus instana, AWS services etc, 
+
+instrumentation
+    most frameworks... .net, java, etc 
+    auto instrumentation when possible, but some might fall short, like Go 
+    traces, metrics, logs 
+
+
