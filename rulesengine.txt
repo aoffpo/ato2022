@@ -1,0 +1,24 @@
+The Power of a Rules Engine
+
+alternative computational model (RulesEngine (fowler 2009)
+    than ifthenelse
+
+https://github.com/WarnerMedia/all-things-open-22
+https://github.com/WarnerMedia/Rules-Engine
+https://martinfowler.com/bliki/RulesEngine.html
+
+memoization is an optimization technique that makes applications more efficient and hence faster. It does this by storing computation results in cache, and retrieving that same information from the cache the next time it's needed instead of computing it again.
+
+
+Condition: op that leads to bool output
+Rule: collection of conditions
+Engine: collection of rules leading to an over evaluation result
+
+Why Warnermedia implementation
+    Limit complexity and nesting (flat representatiuon)
+    json persistence (export) of Engine for visualization (ex: jsongrid)
+        always flat
+
+decouple application from rule set
+    persist in DB and use in another service
+    evolve rules separately from service code
