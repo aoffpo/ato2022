@@ -1,0 +1,77 @@
+Delta lake
+
+https://delta.io/ (supports snowflake)
+
+acid
+scalable metadata
+time travel
+open source unified batch strteaming 
+schema enforcement
+ 
+lakehouse architecture for use with compute engines
+    open source vs. pay version
+    Delta Lake is an open format storage layer
+    Databricks  LakeHouse Platform 
+Databricks runtime -> Snowflake Spark connector or Snowflake connection -> query
+    lifecycle management provided by Databricks via Deltalake and MLFlow 
+??? relationship/arch diagram of Databricks with MLFlow and Snowflake
+    - https://docs.databricks.com/external-data/snowflake.html
+    - use databricks solution as data store or use external data stores like Snowflake
+    - then databricks + delta lake + mlflow manages SDLC of models
+
+
+with Spark apis 
+
+Delta supports multiple connectors -redshift, athena, dbt, kafka
+    later, flink
+
+MLFlow https://mlflow.org/
+
+data is not ml ready
+MLOps - dataops +   devops+  modelops
+        delta lake + repos + mlflow
+
+    brings conventions and standards
+    Components 
+        Tracking https://mlflow.org/docs/latest/tracking.html
+            record and query experiments, code, data, config, results
+            notebooks, local apps, cloud jobs -> tracking server -> UI, API, Spark Datasource
+        Projects https://mlflow.org/docs/latest/projects.html
+            packaging format for reproducable runs on any platform
+            project spec: code, config, metadata -> local execution or remote execution
+                like a directory
+                mlflow run git://remote-repository
+        models  https://mlflow.org/docs/latest/models.html
+            general model format that supports diverse deployment tools
+            ml libs -> model format with 'flavors' -> inline code, docker, k8, mleap spark, clould inference svcs
+            flavors provide formats for upstream technologies (e.g. tensorflow fields)
+        model registry https://mlflow.org/docs/latest/model-registry.html
+            centralized and calaberative model lifecycle management
+            model format -> lifecycle: experimental, staging , a/b tests, production for CI/CD tools  -> users, jobs, rest serving
+            managed lifecyle - review, approve, move through lifecycle by version
+            part of MLFlow package, stored in file, access data via api
+        Pipelines (experimental) in  MLFlow 2.0
+            predefined templates to accelerate model dev and deployment
+            template for regression model, classification + framework support 
+            inbuilt visualization
+        
+        external model references for one model @version referencing other model @version 
+            vacuum + governance for length of time and number of versions back to track
+
+        manage ML lifecycle
+        etl/elt -> models -> tracking  -> model registry -> consumers
+
+!!! verification and lifecycle management of models.
+
+-----
+delta is a transaction log layer on top of parquet
+-----
+read data
+explore and profile data
+create delta lake table
+view data
+I U D + upserts (for cdc + merge_ ) on data tracked by delta 
+ 
+time travel : roll back to any state
+
+delta - versioned data in table 
