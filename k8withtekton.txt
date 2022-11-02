@@ -1,0 +1,145 @@
+Cloud Native CI/CD in Kubernetes with Tekton
+
+Learning Github Actions - (June '23) - Brent Laster
+
+Leveraging Tekton for Cloud Native CI/CD - Brent Laster
+    free on O'Reilly
+    https://www.oreilly.com/library/view/leveraging-tekton-for/9781098110123/
+
+TEKTON 
+    Def: Cloud Native CI/CD 
+        Kubernetes Native
+        implemented by K8 Custom Resource Objects
+        specified as K8 manifests
+        runs on k8 infrastructuer
+    Advantages:
+        separation of concerns between workflow  definition and implementation
+        resources and capacity for CI/CD can scale via K8
+        (JenkinsX - use Jenkins to define Tekton pipelines - auto create cloud pipelines, deployment levels, etc)
+        extensive library for common tasks
+    Disadvantages:
+        complex to setup and maintain 
+        Lots of YAML
+        CD only out of the box. (CI must be built)
+            ???why not just use Argo for CI???
+        Runthrough and finish vs. restart or scale pods 
+
+    Elements:
+        Task Run:
+            K8 Declaritive model - K8 custom Resource
+            points to task and runs it.
+            Task - build , test, etc. 
+                Most basic unit of work
+                when do you want to know success or failure?
+                a pod 
+                Step:
+                    corresponds to a container  encapsulated in Task
+                    Image:
+                        so tekton knows what you want to run 
+                    Command:
+                    Script:
+                    Parameters (args)
+                    WorkingDir
+                    Results 
+        Pipeline run; kicks off pipeline
+            Pipeline:
+                made of multiple tasks 
+
+Create a task   
+    Tekton controller install into K8 cluster 
+    Task Manifest (defining steps, etc)
+    then kubectl apply 
+
+tkn 
+    tekton hub - has object definitions 
+    cli to deal with k8 custom resource objects 
+    tkn hub -n install task 
+    install separately
+    nicer output format that kubectl, but operations can be done in kubectl 
+
+    kubectl apply -r taskrun.yaml 
+        or 
+    tkn task start git-clone --namespace=tekpipe
+     -- Parameters--Parameters--workspace name = 
+     or use yaml file instead of cli params 
+
+Tekton catalog 
+    reusable tasks 
+    in github organized by sub dirs 
+    httpsL///gitgun.com/tektoncd/catalog
+
+    openshift-specific pipeline pieces 
+
+
+Tekton dashboard 
+    User interface (looks the same as in Openshift)
+
+Tekton hub  
+    RedHat: hub.tekton.dev 
+    tasks certified by RedHat
+
+kaniko 
+    build container image w/o docker daemon running 
+    https://hub.tekton.dev/tekton/task/kaniko
+    task 
+
+
+Parameters can get values from task (as defaults), tasktun pipeline, pipeline run
+Workspace - filesystem path where task r/w data
+    workspaces.name.path 
+Results - string a task can write out.  Pass info to other parts of the pipeline 
+ ex: build id 
+    image digest for container 
+TaskRun 
+    ex: git-clone 
+        with params for git location, branch 
+
+pod = task
+container = steps
+
+Pipeline 
+    collection of tasks 
+    basic k8s info
+    incoming parameters for all tasks 
+    workspace
+    task name 
+
+pipeline manifest 
+    with tasks and steps
+
+PipelineRun
+    K8s stuf
+    service account
+    ref to pipeline
+    parameters
+    workspace   
+        mounted volume
+    spins up TaskRun
+    RunAfter - provides sequencing
+
+ex
+
+pipeline    
+    fetch-manifests from git
+    build images - kaniko
+    update deployment 
+        build new images 
+    deploy
+        send to k8 cluster 
+
+Pipeline have the CI component missing from Tekton  
+    pipelines need to be event driven 
+        Tekton Triggers - addon for tekton 
+            service listening for events - controller in Kubernetes  
+    trigger template vs pipelineRun 
+        trigger template is essentially the pipelinerun 
+        pipelinerun is manual
+        triggertemplate has the pipelinerun info for responding to events via webhook in git 
+            trigger binding from pipelinerun and git metadata payload, branch, sha1, etc 
+                set of info that came in with webhook payload \
+            plug it in to triggertemplate to construct pipeline run object.
+
+Tekton Triggers = Argo 
+
+VScode for tekton pipelines extensions
+jenkins plugin. 
