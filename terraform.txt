@@ -94,7 +94,11 @@ Seven Requirements:
                     eu:
         applying this to resources for global resources 
             only create resources once 
-            flags. plus counts 
+            flags. plus counts
+
+
+
+    tf pre secret - terraform component (store secret) - helm/config map (pull them out) - ext-secrets - pod configued - done config managed bytf
 
         
 
