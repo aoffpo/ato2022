@@ -1,0 +1,102 @@
+Terraform Approaches for DR and Multiregion data residency
+
+DR 
+Multi region expansion
+products/apps
+
+postgres on aws is not multi master 
+ 
+Terraform Skeleton
+https://medium.com/globant/introduction-to-terraform-skeleton-dc6858302756
+still complexity in environments
+drift across environments
+pass plans between components 
+
+Multiregion with Terraform 
+3nyotsm
+main.tf has complexity
+envs are complex and sprawling
+
+Seven Requirements:
+    1. Don't roll our own modules
+        attest to compliance, community of devs, docs.  Can't do that on team 
+    2. Group like things and layer them into a "stack" 
+        shared config
+        enforce dependency checks
+        semantics about component composition and responsibilities
+            minimize overlap
+        component layering approach 
+            data, networking, security , compute 
+            tfars for env state backend: latest, production, staging, locals
+            component applied to every environment
+                tf init , use x environment 
+                environment-region 
+    3. Pipeline First 
+        IaC follow same sdlc as software engineering 
+        gitlab, etc 
+        Iac pipeline    
+            child pipeline for each component - PR/MR, plan, apply
+            map out SLDC 
+            commit- run plan
+            merge - tf apply 
+    4. Decouple Component I/O + State  
+        make sure DATA block queries are accurate 
+        tag everything on resources to query later 
+        teardown - because splitting components and state, can't destroy everything at once 
+        Querying across components 
+            network components across pipeline boundaries
+            !!!lookup to find vpc, filter by tag !!!
+    5. Keep It Dry 
+        be intentional when having to not be dry 
+        enforce style and standards
+        Route53 configs passed around but stored
+        move main.tf stuff into locals file 
+        split up main.tf 
+            more lightweight than modules 
+        express config with var maps 
+            map keys are terraform inputs 
+            everything has pointes to maps 
+                ex:  zones file with failover regions and DR 
+    6. DR but, prove it
+        shift state file during DR
+        not destroying legacy resources ia renames
+        lots of small scale tests 
+        collect data about DR process 
+            kill dev environments 
+            break non-prod resources and measure and evaluate 
+                NOTE: count time in estimates to know TCO of DR including development time 
+        Account Management Region - boolean
+            where are you pointed in Amazon 
+            fed into main terraform provider to move references to state file
+
+        Account Mgmt Region -> DR Region 
+            replicate S3 + db to DR Region
+        EX: transit gateway
+            ISAccountMgmt flag  
+                primary provider in region 
+                peering into tG in primary region
+                apply global resource once per environment (not one per region)
+    7. Multi-Region 
+        compliance requirements around data soveriegnty and residency
+            like Atlassian
+        mew install of sass app 
+        6 regions per env 
+            three AMR, three DR 
+
+        locals.tf    (components locals.tf)
+            shared config
+            primary replication region 
+            is replication region
+            replication regions map 
+                env:
+                    us:
+                    ap:
+                    eu:
+        applying this to resources for global resources 
+            only create resources once 
+            flags. plus counts 
+
+        
+
+
+
