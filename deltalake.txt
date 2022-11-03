@@ -5,10 +5,10 @@ https://delta.io/ (supports snowflake)
 acid
 scalable metadata
 time travel
-open source unified batch strteaming 
+open source unified batch streaming 
 schema enforcement
  
-lakehouse architecture for use with compute engines
+lake house architecture for use with compute engines
     open source vs. pay version
     Delta Lake is an open format storage layer
     Databricks  LakeHouse Platform 
@@ -28,27 +28,27 @@ Delta supports multiple connectors -redshift, athena, dbt, kafka
 MLFlow https://mlflow.org/
 
 data is not ml ready
-MLOps - dataops +   devops+  modelops
-        delta lake + repos + mlflow
+MLOps = dataops    + devops + modelops
+        delta lake + repos  + mlflow
 
     brings conventions and standards
     Components 
         Tracking https://mlflow.org/docs/latest/tracking.html
             record and query experiments, code, data, config, results
-            notebooks, local apps, cloud jobs -> tracking server -> UI, API, Spark Datasource
+            notebooks, local apps, cloud jobs -> tracking server -> UI, API, Spark Data source
         Projects https://mlflow.org/docs/latest/projects.html
-            packaging format for reproducable runs on any platform
+            packaging format for reproducible runs on any platform
             project spec: code, config, metadata -> local execution or remote execution
                 like a directory
                 mlflow run git://remote-repository
         models  https://mlflow.org/docs/latest/models.html
             general model format that supports diverse deployment tools
-            ml libs -> model format with 'flavors' -> inline code, docker, k8, mleap spark, clould inference svcs
+            ml libs -> model format with 'flavors' -> inline code, docker, k8, mleap, spark, cloud inference services
             flavors provide formats for upstream technologies (e.g. tensorflow fields)
         model registry https://mlflow.org/docs/latest/model-registry.html
-            centralized and calaberative model lifecycle management
+            centralized and collaborative model lifecycle management
             model format -> lifecycle: experimental, staging , a/b tests, production for CI/CD tools  -> users, jobs, rest serving
-            managed lifecyle - review, approve, move through lifecycle by version
+            managed lifecycle - review, approve, move through lifecycle by version
             part of MLFlow package, stored in file, access data via api
         Pipelines (experimental) in  MLFlow 2.0
             predefined templates to accelerate model dev and deployment

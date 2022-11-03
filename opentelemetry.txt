@@ -6,33 +6,33 @@ why is something happening
     unexpected behaving
 
 observation techniques
-    metrics collection adn observabilty
+    metrics collection and observability
     lots of languages
     lots of trace/metrics formats
     lots of viz and analysis tools
 
 
-    jaegoer, zipkin, prometheurs, instana, aws xray
+    jaegoer, zipkin, prometheus, instana, aws xray
         might need to change if solution doesn't satisfy need .... hard to change
 
 opentelemetry
-    distrbited tracing 
+    distributed tracing 
     metrics
     log collection
     supports client instrumentation
 
-    dropin for frameworks like .net 
+    drop-in for frameworks like .net 
     CNCF project - from opentracing and opencensus
     1400 contributors 110k contributions
 
 
     Features
         open source
-        standardized approch
+        standardized approach
         multiple data formats
         export to multiple backend formats 
             multiple tools supported
-        no vender lockin because easy to switch output formats
+        no vender lock-in because easy to switch output formats
         
 
         opentelemetry sdk > oltp explorer (oltp telemetry data)
@@ -52,13 +52,13 @@ opentelemetry
             and can fanout 
 
 Open Telemetry collector    
-    receievers
+    receivers
         oltp 
             grpc    
             http
-    processsors
+    processors
         batch
-    exporrters
+    exporters
         instana 
             endpoint
             agent_key
@@ -66,12 +66,12 @@ Open Telemetry collector
 service
     pipelines
         traces
-            receievers
-            processsors
-            exporrters
+            receivers
+            processors
+            exporters
 
 
-receiever
+receiver
     gets data into a collector 
     push or pull 
     signals (traces metrics, logs, "baggage")
@@ -81,16 +81,14 @@ receiever
 
 processor 
     buffer, batch
-    memory limiter - prefvent out of memory on collector (drop data or GC)
+    memory limiter - prevent out of memory on collector (drop data or GC)
     contrib/tree/main/processor
 
 exporter
-    reformat from interal format to backend format
+    reformat from internal format to backend format
         jaeger zipkin prometheus instana, AWS services etc, 
 
 instrumentation
     most frameworks... .net, java, etc 
     auto instrumentation when possible, but some might fall short, like Go 
     traces, metrics, logs 
-
-

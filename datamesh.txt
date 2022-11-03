@@ -32,7 +32,7 @@ Key problems
         columns
         description
         types
-        no opensource solutions
+        no opens source solutions
 
     governance 
         size of company is irrelevant
@@ -43,7 +43,7 @@ Key problems
 
     Roles to serve
         in
-            data architenct 
+            data architect 
             data product owner 
             chief data officer
 
@@ -91,9 +91,9 @@ Data mesh
             keep governance
         federated computational governance
             "power to the people"
-            data governance transfered to domain level
+            data governance transferred to domain level
             create a federation of data governing bodies vs. central organization
-                enterpise creates vision, domain implements it 
+                enterprise creates vision, domain implements it 
             not just about data - about compute, too  
 
 Data mesh
@@ -111,7 +111,7 @@ THE DATA QUANTUM  (as building blocks)
     dictionary services 
 
     data onboarding
-        observe, quality, tranformation
+        observe, quality, transformation
     interoperable data 
 
 
@@ -120,7 +120,7 @@ Meshing data
     sources -> product a + b => data product c => applications (1..n)
 
     microservices meet data 
-        apis are the same fro contorl observatiblity and discovery
+        apis are the same fro control observability and discovery
 
     data contracts 
         binding but flexible
@@ -145,7 +145,7 @@ Meshing data
     great expectations --> for quality?
 
     consumers 
-        jupyter, extensions for notebooks for observatiblity, discovery and control 
+        jupyter, extensions for notebooks for observability, discovery and control 
 
     user 
         trusted data
@@ -158,13 +158,5 @@ Meshing data
     takeaways
         data servers users
         four principles
-        data contract defineses gehavior of data processoor
+        data contract defines behavior of data processor
         data product implemented as quantum 
-
-
-
-
-
-        
-
-
